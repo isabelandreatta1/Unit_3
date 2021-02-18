@@ -29,7 +29,30 @@ VALUES ('jj@uwcisak.jp','woofwoof','imadog');
 
 
 2. Create the database using ORM and add some sample users
+```py
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
+
+base = declarative_base()
+engine = create_engine('sqlite:///twitter.sqlite')
+session = sessionmaker(bind=engine)
+
+class Username(base):
+    __tablename__ = 'UserInformation'
+    id = Column(Integer,primary_key= True)
+    username = Column(String)
+    email = Column(String)
+    password = Column(String)
+
+base.metadata.create_all(engine)
+
+user = Username("Isabel","2022.isabel.andreatta@uwcisak.jp", "password" )
+session.add(user)
+session.commit()
+```
 
 3. Research what Hash functions are and think how they could be used to improve the security of the private data in the database.
 
