@@ -32,3 +32,5 @@ VALUES ('jj@uwcisak.jp','woofwoof','imadog');
 
 
 3. Research what Hash functions are and think how they could be used to improve the security of the private data in the database.
+
+Hash functions are functions that convert any length input into fixed-length encrypted string. This is very valuable to secure a database because vulnerable information, because usually hash values are always unique and hard to interpret (no matter if a novel or word, they will always result in the same length value so hackers will not know the actual length of the original input), the brute force method of "decyphering" a hash value makes it almost impossible because of the high computational power and time needed. 
