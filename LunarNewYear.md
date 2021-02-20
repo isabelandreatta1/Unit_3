@@ -26,7 +26,7 @@ VALUES ('jj@uwcisak.jp','woofwoof','imadog');
 ``` 
 
 1. Create the UML class diagram for the db
-
+![UMLDiagram](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML%20Diagram.png)
 
 2. Create the database using ORM and add some sample users
 ```py
