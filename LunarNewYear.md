@@ -1,7 +1,7 @@
 
 ### Create a database for user registration, which include the *necessary* information for a user of a generic application. 
 1. Draw the ER diagram
-
+![ERDiagram](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ERDiagram.png)
 
 2. Create the SQL script to create the database and add some sample users
 
