@@ -119,7 +119,33 @@ Solution(input ="100!000!111").ReverseMode()
 
 ### Quiz 20 
 For each pair of characters of an input String, swap the two characters.
+```py
+class Solution:
+    def __init__ (self,input):
+        #only attribute needed is the input
+        #input is a string
+        self.input : str = input
 
+    def replaceStringByTwo(self):
+        input = self.input
+        newstring = ""
+        #create new empty string so we can add to this later
+        if len(input)<2:
+            #if the string is less than two characters
+            return input
+            # then return the input
+        else:
+            for i in range(0,len(input),2):
+                #for every two letters in the string
+                newstring += input[i+1] + input[i]
+                #switch the order, by putting the second character first and the first character second
+            return newstring
+
+print(Solution("01ABxy").replaceStringByTwo())
+print(Solution("k513bbcd").replaceStringByTwo())
+print(Solution("F").replaceStringByTwo())
+print(Solution("ErrorsShould").replaceStringByTwo())
+``` 
 
 **Testing:**
 
