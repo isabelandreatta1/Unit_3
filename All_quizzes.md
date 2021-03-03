@@ -1,5 +1,27 @@
 ### Quiz 13
 Given an array of food items and price, calculate the total price based on the table of tax categories below:
+```py
+Food = ["bread", "smoked salmon", "apples", "cambert Cheese"]
+Electronics = ["ipad", "huawei P30", "toshiba TV"]
+Liquer = ["beer", "whiskey", "sake"]
+
+def Totalprice(item,rate): 
+  totalprice = 0 
+  for i in range(len(item)):
+    if item[i] in Food: 
+      totalprice += rate[i] * 1.1 
+    if item[i] in Electronics: 
+      totalprice += rate[i] * 1.15
+    if item[i] in Liquer: 
+      totalprice += rate[i] * 1.2
+
+  return(totalprice)
+
+print(Totalprice(item = ["bread","beer","ipad"],rate = [300,800,30000]))
+print(Totalprice(item = ["smoked salmon","apples","sake"],rate = [1200,400,4000]))
+print(Totalprice(item = ["toshiba TV", "whiskey", "cambert Cheese"],rate =[10200,2000,799]))
+``` 
+
 
 ### Quiz 17 
 Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are evenly spaced, so the difference between small and medium is the same as the difference between medium and large
@@ -33,13 +55,62 @@ print(Solutions(2,4,6).evenlySpace())
 
 ### Quiz 18 
 Given a number as a String N. Multiply all the digits of N, and repeat the same with the product obtained till the product consists of only one digit. Output the number of steps taken to do so.
+``` py 
+class Solution:
+    def __init__(self,N):
+        self.N: str = N
+
+    def onlySingleDigit(self):
+        N = self.N
+        step = 0
+        while len(N) > 1:
+            product = 1
+            for i in range(len(N)):
+                product *= int(N[i])
+
+            N = str(product)
+            step += 1
+
+        return step
+print(Solution("39").onlySingleDigit())
+
+``` 
+
+
+**Testing:**
 
 ### Quiz 19 
 Reverse Mode: Given the input/outputs shown, create the program that produces the output. Binary to decimal
+```py
+class Solution:
+    #initaliser, only attribute needed is input
+    def __init__(self,input):
+        self.input: str = input
+
+    #create method
+    def ReverseMode(self):
+        input = self.input
+        #split the string by every exclamation mark
+        newList = input.split("!")
+        #create for loop to iterate through every item/binary number
+        for i in range (len(newList)):
+            #method which converts binary to decimal
+            print(str(int(newList[i], 2)), end="")
+        return
+
+
+Solution(input ="100!000!111").ReverseMode()
+``` 
+
+
+**Testing:**
 
 
 ### Quiz 20 
 For each pair of characters of an input String, swap the two characters.
+
+
+**Testing:**
 
 
 MarkScheme
