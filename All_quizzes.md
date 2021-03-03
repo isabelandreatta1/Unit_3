@@ -33,6 +33,7 @@ print(Totalprice(item = ["smoked salmon","apples","sake"],rate = [1200,400,4000]
 print(Totalprice(item = ["toshiba TV", "whiskey", "cambert Cheese"],rate =[10200,2000,799]))
 ``` 
 **Flowchart** 
+
 ![Flowchart](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/FlowChart_Chapter13.png)
 
 ### Quiz 17 
@@ -63,6 +64,7 @@ print(Solutions(2,4,6).evenlySpace())
 ``` 
 
 **Testing:**
+
 ![Testing1](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz17_testing.png)
 
 
@@ -102,6 +104,7 @@ print(Solution("39").onlySingleDigit())
 
 
 **Testing:**
+
 ![Testing2](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz18_testing.png)
 
 ### Quiz 19 
@@ -164,8 +167,12 @@ print(Solution("ErrorsShould").replaceStringByTwo())
 ``` 
 
 **Testing:**
+
 ![Teting4](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz20_testing.png)
 
+**Flowchart** 
+
+![Flowchart2](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Flowchart_Quiz_20.png)
 
 MarkScheme
 
