@@ -1,21 +1,32 @@
 ### Quiz 13
 Given an array of food items and price, calculate the total price based on the table of tax categories below:
 ```py
+#List of all items in grocery store and their respective categories
 Food = ["bread", "smoked salmon", "apples", "cambert Cheese"]
 Electronics = ["ipad", "huawei P30", "toshiba TV"]
 Liquer = ["beer", "whiskey", "sake"]
 
-def Totalprice(item,rate): 
-  totalprice = 0 
-  for i in range(len(item)):
-    if item[i] in Food: 
-      totalprice += rate[i] * 1.1 
-    if item[i] in Electronics: 
-      totalprice += rate[i] * 1.15
-    if item[i] in Liquer: 
-      totalprice += rate[i] * 1.2
+def Totalprice(item,rate):
+    totalprice = 0
+    #Above is total price counter
+    for i in range(len(item)):
+        #for loop which iterates through every item in the input
+        if item[i] in Food:
+            #if the item is in the food list, then the total price will be the rate of the item
+            # with a tax of 10%
+            totalprice += rate[i] * 1.1
+        if item[i] in Electronics:
+            #if the item is in the electronics list, the tax will be 15%
+            totalprice += rate[i] * 1.15
+        if item[i] in Liquer:
+            #if the item is in the liquer list, the tax will be 20% 
+            totalprice += rate[i] * 1.2
+        else:
+            #if the input is not written in any of the lists
+            #then print error 
+            print("Error")
 
-  return(totalprice)
+    return(totalprice)
 
 print(Totalprice(item = ["bread","beer","ipad"],rate = [300,800,30000]))
 print(Totalprice(item = ["smoked salmon","apples","sake"],rate = [1200,400,4000]))
