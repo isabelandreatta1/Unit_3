@@ -5,23 +5,27 @@ Given an array of food items and price, calculate the total price based on the t
 Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are evenly spaced, so the difference between small and medium is the same as the difference between medium and large
 
 ``` py
-def evenlySpace(a,b,c):
-    #if b is the middle number
-    if a>b and b>c:
-        #then return if the difference between the middle number and larger/smaller number are equal
-        return(abs(a-b) == abs(b-c))
+class Solutions:
+    def __init__(self,a,b,c):
+        self.a: int = a
+        self.b: int = b
+        self.c: int = c
 
-    elif b>a and a>c:
-        #the same as above but here the a is the middle number
-        return(abs(b-a) == abs(a-c))
-    else:
-        #If the middle number is not a nor b, then it must be c
-        return(abs(c-b)==abs(b-a))
+    def evenlySpace(self):
+        a,b,c = self.a, self.b, self.c
+        #if b is the middle number
+        if a>b and b>c:
+            #then return if the difference between the middle number and larger/smaller number are equal
+            return(abs(a-b) == abs(b-c))
 
-print(evenlySpace(2,4,6))
-print(evenlySpace(4,6,2))
-print(evenlySpace(4,6,3))
+        elif b>a and a>c:
+            #the same as above but here the a is the middle number
+            return(abs(b-a) == abs(a-c))
+        else:
+            #If the middle number is not a nor b, then it must be c
+            return(abs(c-b)==abs(b-a))
 
+print(Solutions(2,4,6).evenlySpace())
 ``` 
 
 **Testing:**
