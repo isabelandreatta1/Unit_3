@@ -32,7 +32,8 @@ print(Totalprice(item = ["bread","beer","ipad"],rate = [300,800,30000]))
 print(Totalprice(item = ["smoked salmon","apples","sake"],rate = [1200,400,4000]))
 print(Totalprice(item = ["toshiba TV", "whiskey", "cambert Cheese"],rate =[10200,2000,799]))
 ``` 
-
+**Flowchart** 
+![Flowchart](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/FlowChart_Chapter13.png)
 
 ### Quiz 17 
 Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are evenly spaced, so the difference between small and medium is the same as the difference between medium and large
@@ -62,6 +63,7 @@ print(Solutions(2,4,6).evenlySpace())
 ``` 
 
 **Testing:**
+![Testing1](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz17_testing.png)
 
 
 ### Quiz 18 
@@ -100,6 +102,7 @@ print(Solution("39").onlySingleDigit())
 
 
 **Testing:**
+![Testing2](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz18_testing.png)
 
 ### Quiz 19 
 Reverse Mode: Given the input/outputs shown, create the program that produces the output. Binary to decimal
@@ -126,6 +129,8 @@ Solution(input ="100!000!111").ReverseMode()
 
 
 **Testing:**
+
+![Testing3](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz19_testing.png)
 
 
 ### Quiz 20 
@@ -159,6 +164,7 @@ print(Solution("ErrorsShould").replaceStringByTwo())
 ``` 
 
 **Testing:**
+![Teting4](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz20_testing.png)
 
 
 MarkScheme
