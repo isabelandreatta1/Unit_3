@@ -57,22 +57,33 @@ print(Solutions(2,4,6).evenlySpace())
 Given a number as a String N. Multiply all the digits of N, and repeat the same with the product obtained till the product consists of only one digit. Output the number of steps taken to do so.
 ``` py 
 class Solution:
+    #create class 
     def __init__(self,N):
         self.N: str = N
+        #only attribute needed is N, or the input 
 
     def onlySingleDigit(self):
         N = self.N
         step = 0
+        #this will be the counter for the number of steps 
         while len(N) > 1:
+            #length of N is equal to number of digits 
+            #while number of digits is above 1 ... 
             product = 1
             for i in range(len(N)):
                 product *= int(N[i])
+                #multiply it for every digit 
+                #this for loop iterates through each index 
 
             N = str(product)
+            #convert product into string again 
             step += 1
+            #add one step 
 
         return step
+    
 print(Solution("39").onlySingleDigit())
+
 
 ``` 
 
