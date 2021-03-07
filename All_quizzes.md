@@ -174,6 +174,59 @@ print(Solution("ErrorsShould").replaceStringByTwo())
 
 ![Flowchart2](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Flowchart_Quiz_20.png)
 
+### Quiz 21
+Create a function that outputs a bracket emoji with both arms. The input given its face and its left arm. The right arm is a mirror image of the left arm. 
+
+```py
+#create class for oop 
+class Solution:
+    def __init__(self, input2, input1):
+        # only attributes needed are the two inputs, both are strings 
+        self.input2 : str = input2 #input2 is the lrft arm 
+        self.input1 : str = input1 #input1 is the face 
+
+    #create method to create the right arm of the emoji 
+    def BracketEmoji(self):
+        input2 = self.input2
+        input1 = self.input1
+        #create empty string for the right arm 
+        newinput = ""
+        #for loop which counts backwards since the right arm is the mirror image of the left arm
+        #iterate through every charadcter in the left arm/input 2 
+        for i in range(len(input2),0,-1):
+            #convert the characters into ASCII code 
+            #if the ascii number is either 91,123 or 60, the mirrored character is 2 numbers largers  
+            if (ord(input2[i-1])) == 91 == 123 == 60:
+                #add the characters to the right arm as a string 
+                newinput += str(chr(ord(input2[i-1])+2))
+
+            #if the ascii number is 92, then the mirrored character is 45 numbers less 
+            elif (ord(input2[i-1])) ==92:
+                newinput += str(chr(ord(input2[i-1])-45))
+
+            #if the ascii number is 40, then the mirrored character is one more 
+            elif ord(input2[i-1]) == 40:
+                newinput += str(chr(ord(input2[i-1]+1)))
+
+            #if the ascii number is 47, then the mirrored character is 45 more
+            elif ord(input2[i-1]) == 47:
+                newinput += str(chr(ord(input2[i-1])+45))
+
+            #all other characters don't have a mirrored character so they can remain the same 
+            else:
+                newinput += str(input2[i-1])
+
+        #return leftarm, face, rightarm 
+        return input2 + input1 + newinput
+
+print(Solution(input2 = "|-",input1 = "(~n~)").BracketEmoji())
+print(Solution(input2 = "o-",input1 = "('|-|')").BracketEmoji())
+print(Solution(input2 = "<...\ ", input1 = "[?????]").BracketEmoji())
+``` 
+**Testing**
+
+![Testing5](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz21_testing.png)
+
 MarkScheme
 
 1: Coded
