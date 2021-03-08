@@ -227,6 +227,45 @@ print(Solution(input2 = "<...\ ", input1 = "[?????]").BracketEmoji())
 
 ![Testing5](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz21_testing.png)
 
+### Quiz 22 
+
+```py 
+class Solution:
+    #create class for solution
+    def __init__(self, input):
+        #attribute needed is input, it is a string
+        self.input: str = input
+
+    def BlackBoxProgram(self):
+        input = self.input
+        #split the iput by each word by seperating them by spaces
+        newinput = input.split(" ")
+        #create an empty list for the output
+        output = ""
+        #create for loop which will reiterate for every word in the list
+        for word in newinput:
+            #if the length of the word is less or equal to 2,
+            if len(word) <= 2:
+                #then that means that there is no spaces between and you can just output the word 
+                output += word + " "
+            #if the space between the first and the last letter is more than 0 (or the length of the word is more than 2) 
+            else:
+                #then you output the first letter, the length of the letter minus the first two letters, and the last letter 
+                output += word[0] + str(len(word)-2) + word[-1] + " "
+
+        return output
+
+print(Solution("internationalization").BlackBoxProgram())
+print(Solution("localization").BlackBoxProgram())
+print(Solution("Hello world !").BlackBoxProgram())
+print(Solution("98 99 100 101 102").BlackBoxProgram())
+print(Solution("(codin) + (game) = (codingame)").BlackBoxProgram())
+```
+
+**Testing** 
+
+![Testing6](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz22_testing.png)
+
 MarkScheme
 
 1: Coded
