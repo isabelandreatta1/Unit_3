@@ -266,6 +266,33 @@ print(Solution("(codin) + (game) = (codingame)").BlackBoxProgram())
 
 ![Testing6](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Quiz22_testing.png)
 
+### Quiz 23 
+
+Write a function that checks if a triangle can be built using three integers a,b,c which are the sides of the triangle. 
+
+```py
+class Solution:
+    def __init__(self,a,b,c):
+        #the attributes needed are the inputs
+        self.a : int = a #the inputs are integers
+        self.b : int = b
+        self.c: int = c
+
+    def CheckIfTriangle(self):
+        a = self.a
+        b = self.b
+        c = self.c
+        #return true or false if all the conditions below are true
+        return (a+b>c) and (b+c>=a) and (a+c>b) #these are the rules for the triangle inequality
+
+print(Solution(1,1,2).CheckIfTriangle())
+print(Solution(5,6,3).CheckIfTriangle())
+print(Solution(1,2,9).CheckIfTriangle())
+print(Solution(3,9,2).CheckIfTriangle())
+``` 
+
+**Testing** 
+
 MarkScheme
 
 1: Coded
@@ -273,3 +300,5 @@ MarkScheme
 2: Tested
 
 3: Good coding practices
+
+
