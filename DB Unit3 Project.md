@@ -31,6 +31,8 @@ Kivy is a library created to work only for python. It is a framework which creat
 
 **Why SQLAlchemy and ORM?**
 
+For the database, I will be using SQLAlchemy to create databases. SQLAlchemy is the python toolkit which works similarily like SQL but is in ORM. SQL is one of the most popular langue to interact with databases, with the ability of having almost all the functions related to data-table creating. SQLAlchemy is a more effiecient and simpler way of connecting to databases, with the advantage of obscuring or cutting down many of the tedious SQL tasks like connecting to servers and fetching data [5]. The reason why SQLAlchemy is so much more efficient is because it is an ORM (Object-relational-mapper), which make tasks (like querie) into objects. This result in a a high-level abstracted code. While in some cases it would be better to not obsscure some of the code with ORM, such as in a learning enviornment, for this project, it is preferred. 
+
 ### Feasibility Report 
 **Technical Feasibility: Is there existing technology sufficient to implement the proposed solution?** 
 
@@ -53,6 +55,14 @@ While python is simple to understand and has many developers wellversed in it, t
 The project is due on April 1st, including development and documentatiton. This is feasible since we are provided approximately 3 weeks to work on it and the project has limited features. 
 
 ### Success Criteria 
+
+1. Include the ability to input CAS activity
+2.  Activity is categorised by Service, Activity and Creativity
+3.  Record the time spent per activity
+4.  Include 1 monkey in GUI and 2 personalised small icons 
+5.  Include calender for choosing date 
+6.  Record the accumulated time per category
+7.  Include log-in with username and password
 
 ## Criteria B: Design 
 
