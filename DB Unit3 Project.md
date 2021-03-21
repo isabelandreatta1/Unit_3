@@ -2,13 +2,20 @@
 
 **Table of Contents** 
 
+1. Criteria A: [Planning]()
+2. Criteria B: [Design]()
+3. Criteria C: [Development]()
+4. Criteria D: [Functionality]()
+5. Criteria E: [Evaluation]()
+6. [Appendix]()
+
 ## Criteria A: Planning 
 
 ### Identified Problem 
 My client, Cathy, needs a new system for recording down her CAS activity for IB. She is currently using Managebac, however the features are very user unfriendly since it loads slowly, and the features needed are hard to find and difficult to navigate. The client, therefore, wants a system which is made specifically for recording CAS activity, which can also record the CAS activity in a calendar, . An additional issue my client has with Managebac is that it lacks a personalised interface, and so I will customise the new program to include a monkey theme because my client explicitly mentioned images of monkeys must be present to make it feel personal. 
 
-
 ### Proposed Solution 
+My proposed solutions is to create a remote program using Python and the Kivy Library. The Kivy library provides a framework for both computer and phone applications, making it easy for the developer to implement a GUI (graphical user interface) in the application. This, in turn, makes the program much easier for the custotmer to use because they do not need to use the python console or terminal, but just the GUI screen provided. For the database itself, the data and tables will be stored and created using SQLAlchemy, and the relationships and queries will all be done using ORM (object-relational-mapping). Lastly, the program will include a log-in and registration feature, a page which the user can enter their CAS activities (date, activity name, activity type, and duration of activity all will be included), and 
 
 **Designs** 
 
@@ -20,7 +27,7 @@ My client, Cathy, needs a new system for recording down her CAS activity for IB.
 
 ## Criteria B: Design 
 
-## Criteria C: Development 
+## Appendix 
 
 Source Code: 
 
