@@ -29,7 +29,7 @@ Python is the most appropriate languaging to code in for this project. Other tha
 
 Kivy is a library created to work only for python. It is a framework which creates a GUI for the developer, which will mean the program will not run on the Python console or terminal, but via the GUI Screen. While Kivy uses its own language, it is simple, and will anyways need to run alongside with the python to write in the logic of the program. Kivy langauge organises its code with object-oriented-coding, which widgets and elements are classes [3]. The library is powerful because of the sheer number of features available, and is also supported for all devicess [4]. This allows my program to expand to multi-platforms if wanted. There are some significant set-backs with Kivy, such as major bugs with certain features, and little documentatioin available [4], but because my program will not recquire complex features, this will not have a significant impact. 
 
-**Why SQLAlchemy?**
+**Why SQLAlchemy and ORM?**
 
 ### Feasibility Report 
 **Technical Feasibility: Is there existing technology sufficient to implement the proposed solution?** 
