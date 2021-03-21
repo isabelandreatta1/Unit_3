@@ -2,11 +2,11 @@
 
 **Table of Contents** 
 
-1. Criteria A: [Planning](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-a-planning)
-2. Criteria B: [Design]()
-3. Criteria C: [Development]()
-4. Criteria D: [Functionality]()
-5. Criteria E: [Evaluation]()
+1. [Planning](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-a-planning)
+2. [Design]()
+3. [Development]()
+4. [Functionality]()
+5. [Evaluation]()
 6. [Appendix]()
 
 ## Criteria A: Planning 
