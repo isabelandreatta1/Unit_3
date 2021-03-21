@@ -7,7 +7,7 @@
 3. [Development]()
 4. [Functionality]()
 5. [Evaluation]()
-6. [Appendix]()
+6. [Appendix](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#appendix)
 
 ## Criteria A: Planning 
 
