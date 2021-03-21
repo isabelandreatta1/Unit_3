@@ -34,12 +34,23 @@ Kivy is a library created to work only for python. It is a framework which creat
 ### Feasibility Report 
 **Technical Feasibility: Is there existing technology sufficient to implement the proposed solution?** 
 
+The technical requirements for the proposed solutions are very low, as long as the client has a computer, she will not have an issue with accessing the program. Because Kivy is multi-platform, there are no specific needs for which type of computer. 
+
 **Economical Feasibility: Is the proposed system cost-effective?** 
+
+The program is extremely accessible and cost-effective. As mentioned previously, the only neccessary item is a computer (network not needed). 
 
 **Legal Feasibility: Any conflicts between proposed system and regualtions/laws?** 
 
+Kivy is free for both personal and commercial uses, so in that regard, there are no concerns about conflicts. Also, the project will remain small-scale and I have no intentions of getting the program copy-righted. 
 
 **Operational Feasibility: Are there existing organisational practices and procedures sufficient to support the operation of the new proposed system?** 
+
+While python is simple to understand and has many developers wellversed in it, the Kivy community remains small. This means that there are not many technicians which will be able to maintain it. But, Kivy is an easy language to understand if someone has knowledge of Python, and this project will be heavily documented on this Github repository. Also, the program is  simple so there will little need for maintanence.  
+
+**Schedule Feasibility**: 
+
+The project is due on April 1st, including development and documentatiton. This is feasible since we are provided approximately 3 weeks to work on it and the project has limited features. 
 
 ### Success Criteria 
 
