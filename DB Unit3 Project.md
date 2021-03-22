@@ -71,15 +71,16 @@ The project is due on April 1st, including development and documentatiton. This 
 ### Flow Diagram 
 
 ### UML Diagram 
-![UML_DIAGRAM](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML_DIAGRAM.png)
+<img src="hhttps://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML_DIAGRAM.png" width=50% height=50%>
 
 ### ER Diagrams 
-![ER_DIAGRAM](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ER_DIAGRAM.png)
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ER_DIAGRAM.png" width=50% height=50%>
 
 ### Normalised Tables 
-![table_1](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png)
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png" width=50% height=50%>
 
-![table_3](https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png)
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
+![table_3]()
 
 
 ## Appendix 
