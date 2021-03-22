@@ -66,6 +66,16 @@ The project is due on April 1st, including development and documentatiton. This 
 
 ## Criteria B: Design 
 
+###  Sketches 
+
+### Flow Diagram 
+
+### UML Diagram 
+
+### ER Diagrams 
+
+### Normalised Tables 
+
 ## Appendix 
 
 Source Code: 
