@@ -71,7 +71,7 @@ The project is due on April 1st, including development and documentatiton. This 
 ### Flow Diagram 
 
 ### UML Diagram 
-<img src="hhttps://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML_DIAGRAM.png" width=50% height=50%>
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML_DIAGRAM.png" width=50% height=50%>
 
 ### ER Diagrams 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ER_DIAGRAM.png" width=50% height=50%>
