@@ -68,6 +68,8 @@ The project is due on April 1st, including development and documentatiton. This 
 
 ###  Sketches 
 
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/sketch_db.jpg" width=50% height=50%>
+
 ### Flow Diagram 
 
 
