@@ -70,8 +70,9 @@ The project is due on April 1st, including development and documentatiton. This 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/sketch_db.jpg" width=50% height=50%>
 
-### Flow Diagram 
+### System Flow Diagram 
 
+### Flow Diagram 
 
 ### UML Diagram 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML.png" width=50% height=50%>
@@ -83,6 +84,34 @@ The project is due on April 1st, including development and documentatiton. This 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png" width=50% height=50%>
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
+
+## Criteria C: Development 
+
+- present the problem first
+- write comments
+- make sure variable names are meaningful 
+
+### Creating the Login-Screen 
+
+
+### Creating the Registration Screen 
+
+
+### Creating the Home Page 
+
+
+### Creating the Add Entry Page 
+
+
+### Creating the Past Entries Page 
+
+
+## Criteria D: Functionality 
+
+
+## Criteria E: Evaluation 
+
+
 
 ## Appendix 
 
