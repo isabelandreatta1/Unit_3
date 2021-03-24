@@ -91,16 +91,217 @@ The project is due on April 1st, including development and documentatiton. This 
 - write comments
 - make sure variable names are meaningful 
 
-### Creating the Login-Screen 
+### Login Screen 
 
+***UI creation using Kivy*** 
+
+The first part of creating the login screen is to design and code the UI (user interface). Without the actual UI,  the user will not be able to access the program. Since I am using Kivy, I have to use Kivy language. The way Kivy's UI works is that all the objects created are relative, and it's almost like layering paper on top of each other. The most fundamental and bottom "layer" is the screen. I want the screen to have a box layout and the size to be dynamic (meaning the user can change the screen size). Lastly, to create the bare sreen, I need to choose how objects will be placed in relation with each other; this is called orientation. I prefer to make it vertical so that every new element goes below the previous one. Once I created the basic screen, I wanted to add a pattern I drew for the background. After placing the png file in the project, I fit the image to the screen and refered the file name as the source of the background. 
+```
+ScreenManager:
+    id: scr_manager
+
+    LoginScreen:
+        name:"LoginScreen"
+        
+<LoginScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        size: root.height, root.width
+        FitImage:
+            source: "Background_DB.png"
+        
+``` 
+
+Size hint means the size as a relation to the parent, or the screen 
+```
+MDCard:
+        size_hint: 0.6, 0.6 #relational to parent
+        elevation: 10
+        pos_hint: {"center_x": .5, "center_y": 0.5}
+        orientation: "vertical"
+        
+        MDBoxLayout:
+            id: content
+            adaptive_height: True
+            orientation: "vertical"
+            padding: dp(10)
+            spacing: dp(20)
+ ``` 
+ 
+ Add label 
+ ```
+ MDLabel:
+          text: "Login"
+          font_style: "H4"
+          halign:"center"MDLabel:
+          text: "Login"
+          font_style: "H4"
+          halign:"center"
+
+``` 
+
+Text Field 
+
+```
+
+ MDTextField:
+     id: username_input
+     hint_text: "Username"
+     helper_text: "Invalid user"
+     helper_text_mode: "on_error"
+     required: True
+     on_text_validate:
+         root.validate_user()
+
+ MDTextField:
+     id: password_input
+     hint_text: "Password"
+     icon_right: "eye-off"
+     helper_text: "Invalid password"
+     helper_text_mode:"on_error"
+     required: True
+     password: True
+``` 
+Buttons
+```
+            MDRaisedButton:
+                text: "Log in"
+                on_release:
+                    root.try_login()
+                    print("button was pressed")
+
+            MDRaisedButton:
+                text: "Register"
+                on_release:
+                    root.parent.current = "RegisterScreen"
+                   
+```
+
+
+***Logic to create the screens*** 
+
+```py
+
+class LoginScreen(MDScreen):
+    pass 
+    
+class MainApp(MDApp):
+    def build(self):
+        self.theme_cls.primary_palette = "Amber"
+        return
+        
+        
+
+```
+
+***Creating tables with ORM*** 
+```py
+Base = declarative_base()
+
+class User(Base):
+    __tablename__ = 'User'
+    id= Column(Integer,primary_key=True,autoincrement=True)
+    username= Column(String)
+    password= Column(String)
+    def __init__(self,username,password):
+        self.username = username
+        self.password = password
+
+class CAS_Record(Base):
+    __tablename__ = 'CAS'
+    id = Column(Integer, primary_key = True, autoincrement = True)
+    activity_name = Column(String)
+    date = Column(DateTime)
+    duration = Column(Integer)
+    user_id = Column(Integer, ForeignKey('User.id'))
+
+    def __init__(self, activity_name,date, duration):
+        self.activity_name = activity_name
+        self.date = date
+        self.duration = duration
+
+engine = create_engine('sqlite:///database.sqlite')
+session = sessionmaker()
+session.configure(bind=engine)
+Base.metadata.create_all(engine)
+``` 
+
+***Verifying user using database and logic behind Login*** 
+```py
+class LoginScreen(MDScreen):
+
+    def validate_user(self):
+        self.ids.password_input.error = True
+        self.ids.password_input.helper_text = "Incorrect username or password"
+        print(self.ids.username_input.error)
+        print(self.ids.username_input.helper_text)
+
+    def try_login(self):
+        username = self.ids.username_input.text
+        password= self.ids.password_input.text
+        Session = sessionmaker(bind = engine)
+        session = Session()
+        validate_user = session.query(User).filter_by(username = username, password = password).one_or_none()
+        if validate_user:
+            print("User exists")
+            self.parent.current = "HomePage"
+
+        else:
+            print("User does not exist")
+            self.validate_user()
+        session.close()class LoginScreen(MDScreen):
+
+    def validate_user(self):
+        self.ids.password_input.error = True
+        self.ids.password_input.helper_text = "Incorrect username or password"
+        print(self.ids.username_input.error)
+        print(self.ids.username_input.helper_text)
+
+    def try_login(self):
+        username = self.ids.username_input.text
+        password= self.ids.password_input.text
+        Session = sessionmaker(bind = engine)
+        session = Session()
+        validate_user = session.query(User).filter_by(username = username, password = password).one_or_none()
+        if validate_user:
+            print("User exists")
+            self.parent.current = "HomePage"
+
+        else:
+            print("User does not exist")
+            self.validate_user()
+        session.close()
+ ```
 
 ### Creating the Registration Screen 
+
+UI creation is similar process of login screen 
+
+***Adding user to database*** 
+```py
+    def try_register(self):
+        username = self.ids.new_username_input.text
+        password = self.ids.new_password_input.text
+        password_confirm = self.ids.new_password_confirm.text
+        if password == password_confirm:
+            s = session()
+            NewUser = User(username,password)
+            s.add(NewUser)
+            s.commit()
+            s.close()
+        else:
+            print("Passwords don't match")
+```
 
 
 ### Creating the Home Page 
 
+Just create a screen with two buttons. Most simplest aspect but very important 
+
 
 ### Creating the Add Entry Page 
+
+Similar process of login screen but more complicated. 
 
 
 ### Creating the Past Entries Page 
