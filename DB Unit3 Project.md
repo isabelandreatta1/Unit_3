@@ -319,15 +319,14 @@ Similar process of login screen but more complicated.
 Source Code: 
 
 ### Python File 
-```py 
-from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
+```py
+from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, desc
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 import sqlite3
 from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.app import MDApp
-from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.label import MDLabel
 from sqlalchemy import create_engine
@@ -337,35 +336,40 @@ from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.button import MDFillRoundFlatButton
 from kivy.uix.relativelayout import RelativeLayout
 
-
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'User'
-    id= Column(Integer,primary_key=True,autoincrement=True)
-    username= Column(String)
-    password= Column(String)
-    def __init__(self,username,password):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String)
+    password = Column(String)
+
+    def __init__(self, username, password):
         self.username = username
         self.password = password
 
+
 class CAS_Record(Base):
     __tablename__ = 'CAS'
-    id = Column(Integer, primary_key = True, autoincrement = True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     activity_name = Column(String)
     date = Column(DateTime)
     duration = Column(Integer)
+    cas_type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
 
-    def __init__(self, activity_name,date, duration):
+    def __init__(self, activity_name, date, duration):
         self.activity_name = activity_name
         self.date = date
         self.duration = duration
+
 
 engine = create_engine('sqlite:///database.sqlite')
 session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
+
 
 class LoginScreen(MDScreen):
 
@@ -377,18 +381,20 @@ class LoginScreen(MDScreen):
 
     def try_login(self):
         username = self.ids.username_input.text
-        password= self.ids.password_input.text
-        Session = sessionmaker(bind = engine)
+        password = self.ids.password_input.text
+        Session = sessionmaker(bind=engine)
         session = Session()
-        validate_user = session.query(User).filter_by(username = username, password = password).one_or_none()
+        validate_user = session.query(User).filter_by(username=username, password=password).one_or_none()
         if validate_user:
             print("User exists")
+            LoginScreen.try_login.user_id = validate_user.id
             self.parent.current = "HomePage"
 
         else:
             print("User does not exist")
             self.validate_user()
         session.close()
+
 
 class RegisterScreen(MDScreen):
     def try_register(self):
@@ -397,19 +403,25 @@ class RegisterScreen(MDScreen):
         password_confirm = self.ids.new_password_confirm.text
         if password == password_confirm:
             s = session()
-            NewUser = User(username,password)
+            NewUser = User(username, password)
             s.add(NewUser)
             s.commit()
             s.close()
         else:
             print("Passwords don't match")
 
+
 class HomePage(MDScreen):
     pass
-    # create two buttons which will bring to either add entry page or calendar page
+
+
+class SavedBackground(MDScreen):
+    pass
+
 
 class ButtonLabel(ButtonBehavior, MDLabel):
     pass
+
 
 class AddNewEntry(MDScreen):
     select_date = None
@@ -443,43 +455,56 @@ class AddNewEntry(MDScreen):
         instance_menu.dismiss()
 
     def drop_down_method(self):
-        menu_items = ["10m","20m","30m","40m","50m","1h"]
+        menu_items = ["10m", "20m", "30m", "40m", "50m", "1h"]
         self.menu = MDDropdownMenu(
-            caller = self.ids.drop_down,
-            items = menu_items,
-            position = "center",
-            width_mult = 6,
+            caller=self.ids.drop_down,
+            items=menu_items,
+            position="center",
+            width_mult=6,
         )
-        self.menu.bind(on_release= self.set_item)
+        self.menu.bind(on_release=self.set_item)
 
-    def addEntry(self):
-            activity_name = self.ids.activity_input.text
-            duration = self.ids.duration_input.text
-            activity = self.ids.activity_type
-            creativity = self.ids.creativity_type
-            add_date = AddNewEntry.select_date
+    def cas_type(self):
+        if self.ids.creativity_type.state == "normal":
+            self.cas_type = "Creativity"
+        elif self.ids.activity_type.state == "normal":
+            self.cas_type = "Activity"
+        else:
+            self.cas_type = "Service"
 
-            s = session()
-            NewActivity = CAS_Record(activity_name, add_date, duration)
-            s.add(NewActivity)
-            s.commit()
-            s.close()
-            print("complete")
-        #Add entry to the CAS activities
-        #/2. Type of Activity (will change table), 3. time/duration 4. Date
+    def addEntry(self,user_id,cas_type):
+        activity_name = self.ids.activity_input.text
+        duration = self.ids.duration_input.text
+        add_date = AddNewEntry.select_date
+        cas_type = self.cas_type
+        user_id = LoginScreen.try_login.user_id
+        print(user_id)
+        print(cas_type)
+        s = session()
+        NewActivity = CAS_Record(activity_name, add_date, duration, cas_type, user_id)
+        s.add(NewActivity)
+        s.commit()
+        s.close()
+        print("complete")
+    # Add entry to the CAS activities
+    # /2. Type of Activity (will change table), 3. time/duration 4. Date
+
 
 class Calendar(MDScreen):
-    def show_past_record(self):
+    def show_past_record(self, activity_name=None):
+        Session = sessionmaker(bind=engine)
+        s = Session()
+        show_records = s.query(CAS_Record).order_by(desc('activity_name')).filter_by(activity_name=activity_name).all()
+        print(show_records)
 
-        validate_user = session.query(User).filter_by().one_or_none()
 
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Amber"
         return
 
-MainApp().run()
 
+MainApp().run()
 
 
 ```
@@ -504,11 +529,13 @@ ScreenManager:
     Calendar:
         name: "Calendar"
 
+    SavedBackground:
+        name: "SavedBackground"
+
 <LoginScreen>:
     BoxLayout:
         orientation: "vertical"
         size: root.height, root.width
-
         FitImage:
             source: "Background_DB.png"
 
@@ -627,17 +654,17 @@ ScreenManager:
             source: "Background_DB.png"
 
     MDCard:
-        size_hint: 0.6, 0.6 #relational to parent
+        size_hint: 0.75, 0.75 #relational to parent
         elevation: 10
         pos_hint: {"center_x": .5, "center_y": 0.5}
         orientation: "vertical"
+        FitImage:
+            source: "homepage.jpg"
 
         MDBoxLayout:
             id: content
             adaptive_height: True
             orientation: "vertical"
-            padding: dp(10)
-            spacing: dp(20)
 
             MDLabel:
                 text: "Welcome"
@@ -646,13 +673,17 @@ ScreenManager:
 
             MDRaisedButton:
                 text: "Add entry"
+                pos_hint: {'center_x': 0.2}
                 on_release:
                     root.parent.current = "AddNewEntry"
 
             MDRaisedButton:
                 text: "Look at calendar"
+                pos_hint: {'center_x': 0.8}
                 on_release:
                     root.parent.current = "Calendar"
+
+
 
 <AddNewEntry>:
     BoxLayout:
@@ -660,7 +691,7 @@ ScreenManager:
         size: root.height, root.width
 
     MDCard:
-        size_hint: 0.6, 0.6 #relational to parent
+        size_hint: 0.7,0.7 #relational to parent
         elevation: 10
         pos_hint: {"center_x": .5, "center_y": 0.5}
         orientation: "vertical"
@@ -669,13 +700,15 @@ ScreenManager:
             id: content
             adaptive_height: True
             orientation: "vertical"
-            padding: dp(10)
-            spacing: dp(20)
 
             MDLabel:
                 text: "Add Entry"
                 font_style: "H4"
                 halign:"center"
+
+            MDLabel:
+                text:"Choose activity type"
+                font_size: dp(15)
 
             MDTextField:
                 id: activity_input
@@ -684,29 +717,24 @@ ScreenManager:
                 helper_text_mode:"on_error"
                 required: True
 
-            MDLabel:
-                text:"Choose activity type"
-                font_size: dp(15)
 
             MDRaisedButton:
                 text:"Creativity"
                 id: creativity_type
-                group: "cas_type"
-                pos_hint: {'center_x': 0.25, 'center_y': 0.5}
-                on_release: self.background_color = (1, 0, 0, 1)
+                pos_hint: {'center_x': 0.25}
+                on_press:
+                    root.cas_type()
 
             MDRaisedButton:
                 text:"Activity"
                 id: activity_type
-                group: "cas_type"
-                pos_hint: {'center_x': 0.5, 'center_y': 0}
+                pos_hint: {'center_x': 0.5}
                 on_release: self.background_color = (1, 0, 0, 1)
 
             MDRaisedButton:
                 text:"Service"
                 id: service_type
-                group: "cas_type"
-                pos_hint: {"center_x": 0.75, "center_y": 0}
+                pos_hint: {"center_x": 0.75}
                 on_release: self.background_color = (1, 0, 0, 1)
 
             MDTextField:
@@ -723,12 +751,14 @@ ScreenManager:
                 pos_hint: {'center_x': 0.8}
                 on_release:
                     root.addEntry()
+                    root.parent.current = "SavedBackground"
 
             MDRaisedButton:
                 text: "Return"
                 pos_hint: {'center_x': 0.2}
                 on_release:
                     root.parent.current = "HomePage"
+
 
 <Calendar>:
     BoxLayout:
@@ -740,6 +770,26 @@ ScreenManager:
             elevation: 10
             pos_hint: {"center_x": .5, "center_y": 0.5}
             orientation: "vertical"
+
+            MDRaisedButton:
+                text: "Look at calendar"
+                pos_hint: {'center_x': 0.8}
+                on_release:
+                    root.show_past_record()
+
+
+<SavedBackground>:
+    BoxLayout:
+        orientation: "vertical"
+        size: root.height, root.width
+        FitImage:
+            source: "save_background.png"
+
+        MDRaisedButton:
+            text: "Return"
+            pos_hint: {'center_x': 0.8}
+            on_release:
+                root.parent.current = "HomePage"
 
 ```
 
