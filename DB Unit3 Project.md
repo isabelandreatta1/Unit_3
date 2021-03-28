@@ -59,7 +59,7 @@ The project is due on April 1st, including development and documentatiton. This 
 1. Include the ability to input CAS activity
 2.  Activity is categorised by Service, Activity and Creativity
 3.  Record the time spent per activity
-4.  Include 1 monkey in GUI and 2 personalised small icons 
+4.  Include 1 monkey in UI 
 5.  Include calender for choosing date 
 6.  Include log-in with username and password
 
