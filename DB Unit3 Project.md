@@ -302,7 +302,9 @@ Similar process of login screen but more complicated.
 
 ## Criteria D: Functionality 
 
-This is a video of the program working 
+https://drive.google.com/file/d/1uiGoPknZZWblvtDjy1pMCVxiAxIvHRAg/view?usp=sharing 
+
+Above is my functionality video 
 
 ## Criteria E: Evaluation 
 
@@ -310,15 +312,19 @@ This is a video of the program working
 
 | Step                   | Input                                                                                                                                                     | Output                                                                          | Success Criteria                                                                                                    | Success |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------|
-| 1. Register User Error | Username, non-matching confirm password and password                                                                                                      | Text stating "Passwords don't match"                                            | Include log-in with username and password                                                                           |         |
-| 2. Register User       | Username, confirm password and password                                                                                                                   | Text input in box and  user information stored in  User database                | Include log-in with username and password                                                                           |         |
-| 3. Login User Error    | Incorrect username and password                                                                                                                           | Text stating "Incorrect username or password" when pressing password text field | Include log-in with username and password                                                                           |         |
-| 4. Login User          | Registered username and password                                                                                                                          | Home Page appears                                                               | Include log-in with username and password                                                                           |         |
-| 5. Add Entry           | Input text in activity, duration, press the desired button for CAS activity, click the date of event. Repeat three times to check if all sections works.  | Text inputed in boxes                                                           | Include the ability to input CAS activity,  Record the time spent per activity,  Include calender for choosing date |         |
-| 6. Save Entry          | Press "Done" Button                                                                                                                                       | Entry and information saved in CAS Records database with the correct  user ID   | Activity is categorized by Service, Activity and Creativity                                                         |         |
-| 7. Cancel Entry        | Repeat Add entry process but instead of pressing done,  press return                                                                                      | None of the inputs from the entry are saved in the database                     | Include the ability to input CAS activity                                                                           |         |
-| 6. Save Entry          | Press "Done" Button                                                                                                                                       | Screen with a picture of a monkey  should appear                                | Include 1 monkey in GUI                                                                                             |         |
+| 1. Register User Error | Username, non-matching confirm password and password                                                                                                      | Text stating "Passwords don't match"                                            | Include log-in with username and password                                                                           | Yes     |
+| 2. Register User       | Username, confirm password and password                                                                                                                   | Text input in box and  user information stored in  User database                | Include log-in with username and password                                                                           | Yes     |
+| 3. Login User Error    | Incorrect username and password                                                                                                                           | Text stating "Incorrect username or password" when pressing password text field | Include log-in with username and password                                                                           | Yes     |
+| 4. Login User          | Registered username and password                                                                                                                          | Home Page appears                                                               | Include log-in with username and password                                                                           | Yes     |
+| 5. Add Entry           | Input text in activity, duration, press the desired button for CAS activity, click the date of event. Repeat three times to check if all sections works.  | Text inputed in boxes                                                           | Include the ability to input CAS activity,  Record the time spent per activity,  Include calender for choosing date | Yes     |
+| 6. Save Entry          | Press "Done" Button                                                                                                                                       | Entry and information saved in CAS Records database with the correct  user ID   | Activity is categorized by Service, Activity and Creativity                                                         | Yes     |
+| 7. Cancel Entry        | Repeat Add entry process but instead of pressing done,  press return                                                                                      | None of the inputs from the entry are saved in the database                     | Include the ability to input CAS activity                                                                           | Yes     |
+| 8. Save Entry          | Press "Done" Button                                                                                                                                       | Screen with a picture of a monkey  should appear                                | Include 1 monkey in GUI                                                                                             | Yes     |
 |                        |                                                                                                                                                           |                                                                                 |                                                                                                                     |         |
+
+###  Unit Testing 
+
+
 ### Beta Testing 
 
 
@@ -370,10 +376,12 @@ class CAS_Record(Base):
     cas_type = Column(String)
     user_id = Column(Integer, ForeignKey('User.id'))
 
-    def __init__(self, activity_name, date, duration):
+    def __init__(self, activity_name, date, duration, cas_type, user_id):
         self.activity_name = activity_name
         self.date = date
         self.duration = duration
+        self.cas_type = cas_type
+        self.user_id = user_id
 
 
 engine = create_engine('sqlite:///database.sqlite')
@@ -383,7 +391,7 @@ Base.metadata.create_all(engine)
 
 
 class LoginScreen(MDScreen):
-
+    user_id = None
     def validate_user(self):
         self.ids.password_input.error = True
         self.ids.password_input.helper_text = "Incorrect username or password"
@@ -398,14 +406,13 @@ class LoginScreen(MDScreen):
         validate_user = session.query(User).filter_by(username=username, password=password).one_or_none()
         if validate_user:
             print("User exists")
-            LoginScreen.try_login.user_id = validate_user.id
+            LoginScreen.user_id = validate_user.id
             self.parent.current = "HomePage"
 
         else:
             print("User does not exist")
             self.validate_user()
         session.close()
-
 
 class RegisterScreen(MDScreen):
     def try_register(self):
@@ -421,18 +428,14 @@ class RegisterScreen(MDScreen):
         else:
             print("Passwords don't match")
 
-
 class HomePage(MDScreen):
     pass
-
 
 class SavedBackground(MDScreen):
     pass
 
-
 class ButtonLabel(ButtonBehavior, MDLabel):
     pass
-
 
 class AddNewEntry(MDScreen):
     select_date = None
@@ -475,20 +478,24 @@ class AddNewEntry(MDScreen):
         )
         self.menu.bind(on_release=self.set_item)
 
-    def cas_type(self):
-        if self.ids.creativity_type.state == "normal":
+    def check_cas_type(self):
+        self.ids.creativity_type.background_color = 1.0, 0.0, 0.0, 1.0
+        if self.ids.creativity_type.state == "down":
             self.cas_type = "Creativity"
-        elif self.ids.activity_type.state == "normal":
+            print(self.cas_type)
+        elif self.ids.activity_type.state == "down":
             self.cas_type = "Activity"
-        else:
+            print(self.cas_type)
+        elif self.ids.service_type.state == "down":
             self.cas_type = "Service"
+            print(self.cas_type)
 
-    def addEntry(self,user_id,cas_type):
+    def addEntry(self):
         activity_name = self.ids.activity_input.text
         duration = self.ids.duration_input.text
         add_date = AddNewEntry.select_date
         cas_type = self.cas_type
-        user_id = LoginScreen.try_login.user_id
+        user_id = LoginScreen.user_id
         print(user_id)
         print(cas_type)
         s = session()
@@ -500,23 +507,12 @@ class AddNewEntry(MDScreen):
     # Add entry to the CAS activities
     # /2. Type of Activity (will change table), 3. time/duration 4. Date
 
-
-class Calendar(MDScreen):
-    def show_past_record(self, activity_name=None):
-        Session = sessionmaker(bind=engine)
-        s = Session()
-        show_records = s.query(CAS_Record).order_by(desc('activity_name')).filter_by(activity_name=activity_name).all()
-        print(show_records)
-
-
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Amber"
         return
 
-
 MainApp().run()
-
 
 ```
 
@@ -536,9 +532,6 @@ ScreenManager:
 
     AddNewEntry:
         name: "AddNewEntry"
-
-    Calendar:
-        name: "Calendar"
 
     SavedBackground:
         name: "SavedBackground"
@@ -682,27 +675,18 @@ ScreenManager:
                 font_style: "H4"
                 halign:"center"
 
-            MDRaisedButton:
+            MDFillRoundFlatButton:
                 text: "Add entry"
                 pos_hint: {'center_x': 0.2}
                 on_release:
                     root.parent.current = "AddNewEntry"
 
-            MDRaisedButton:
-                text: "Look at calendar"
-                pos_hint: {'center_x': 0.8}
-                on_release:
-                    root.parent.current = "Calendar"
-
-
-
 <AddNewEntry>:
     BoxLayout:
         orientation: "vertical"
         size: root.height, root.width
-
     MDCard:
-        size_hint: 0.7,0.7 #relational to parent
+        size_hint: 0.6, 0.6 #relational to parent
         elevation: 10
         pos_hint: {"center_x": .5, "center_y": 0.5}
         orientation: "vertical"
@@ -711,83 +695,78 @@ ScreenManager:
             id: content
             adaptive_height: True
             orientation: "vertical"
+            padding: dp(10)
+            spacing: dp(10)
 
             MDLabel:
                 text: "Add Entry"
                 font_style: "H4"
                 halign:"center"
 
-            MDLabel:
-                text:"Choose activity type"
-                font_size: dp(15)
+            MDBoxLayout:
+                id: content
+                adaptive_height: True
+                orientation: "horizontal"
+                spacing: dp(50)
+                padding: dp(20)
 
-            MDTextField:
-                id: activity_input
-                hint_text: "Name of activity"
-                helper_text: "Invalid activity"
-                helper_text_mode:"on_error"
-                required: True
+                MDTextField:
+                    id: activity_input
+                    hint_text: "Name of activity"
+                    helper_text: "Invalid activity"
+                    helper_text_mode:"on_error"
+                    required: True
 
+                MDFillRoundFlatButton:
+                    text: "Add Date"
+                    on_release: root.show_date_picker()
 
-            MDRaisedButton:
-                text:"Creativity"
-                id: creativity_type
-                pos_hint: {'center_x': 0.25}
-                on_press:
-                    root.cas_type()
+                MDTextField:
+                    hint_text: "Duration of Activity"
+                    id: duration_input
+                    required: True
 
-            MDRaisedButton:
-                text:"Activity"
-                id: activity_type
-                pos_hint: {'center_x': 0.5}
-                on_release: self.background_color = (1, 0, 0, 1)
+            MDBoxLayout:
+                id: content
+                adaptive_height: True
+                orientation: "horizontal"
+                padding: dp(20)
+                spacing: dp(100)
 
-            MDRaisedButton:
-                text:"Service"
-                id: service_type
-                pos_hint: {"center_x": 0.75}
-                on_release: self.background_color = (1, 0, 0, 1)
+                MDFillRoundFlatButton:
+                    text:"Creativity"
+                    id: creativity_type
+                    on_press:
+                        root.check_cas_type()
 
-            MDTextField:
-                hint_text: "Duration of Activity in minutes"
-                id: duration_input
-                required: True
+                MDFillRoundFlatButton:
+                    text:"Activity"
+                    id: activity_type
+                    on_press:
+                        root.check_cas_type()
 
-            MDRaisedButton:
-                text: "Add Date"
-                on_release: root.show_date_picker()
+                MDFillRoundFlatButton:
+                    text:"Service"
+                    id: service_type
+                    on_press:
+                        root.check_cas_type()
 
-            MDFillRoundFlatButton:
-                text: "Done"
-                pos_hint: {'center_x': 0.8}
-                on_release:
-                    root.addEntry()
-                    root.parent.current = "SavedBackground"
+            MDBoxLayout:
+                id: content
+                adaptive_height: True
+                orientation: "horizontal"
+                spacing: dp(330)
 
-            MDRaisedButton:
-                text: "Return"
-                pos_hint: {'center_x': 0.2}
-                on_release:
-                    root.parent.current = "HomePage"
+                MDRoundFlatButton:
+                    text: "Done"
+                    on_release:
+                        root.addEntry()
+                        root.parent.current = "SavedBackground"
 
-
-<Calendar>:
-    BoxLayout:
-        orientation: "vertical"
-        size: root.height, root.width
-
-        MDCard:
-            size_hint: 0.6, 0.6 #relational to parent
-            elevation: 10
-            pos_hint: {"center_x": .5, "center_y": 0.5}
-            orientation: "vertical"
-
-            MDRaisedButton:
-                text: "Look at calendar"
-                pos_hint: {'center_x': 0.8}
-                on_release:
-                    root.show_past_record()
-
+                MDRoundFlatButton:
+                    text: "Return"
+                    on_release:
+                        root.parent.current = "HomePage"
 
 <SavedBackground>:
     BoxLayout:
@@ -796,7 +775,7 @@ ScreenManager:
         FitImage:
             source: "save_background.png"
 
-        MDRaisedButton:
+        MDFillRoundFlatButton:
             text: "Return"
             pos_hint: {'center_x': 0.8}
             on_release:
