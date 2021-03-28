@@ -303,9 +303,26 @@ Similar process of login screen but more complicated.
 
 ## Criteria D: Functionality 
 
+This is a video of the program working 
 
 ## Criteria E: Evaluation 
 
+### Alpha Testing 
+
+| Step                   | Input                                                                                                | Output                                                                          | Success |
+|------------------------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|---------|
+| 1. Register User Error | Username, non-matching confirm password and password                                                 | Text stating "Passwords don't match"                                            |         |
+| 2. Register User       | Username, confirm password and password                                                              | Text input in box and  user information stored in  User database                |         |
+| 3. Login User Error    | Incorrect username and password                                                                      | Text stating "Incorrect username or password" when pressing password text field |         |
+| 4. Login User          | Registered username and password                                                                     | Home Page appears                                                               |         |
+| 5. Add Entry           | Input text in activity, duration, press the desired button for CAS activity, click the date of event | Text inputed in boxes                                                           |         |
+| 6. Save Entry          | Press "Done" Button                                                                                  | Entry and information saved in CAS Records database with the correct  user ID   |         |
+| 7. Cancel Entry        | Repeat Add entry process but instead of pressing done,  press return                                 | None of the inputs from the entry are saved in the database                     |         |
+
+### Beta Testing 
+
+
+### Extent and Limitations of Program 
 
 
 ## Appendix 
