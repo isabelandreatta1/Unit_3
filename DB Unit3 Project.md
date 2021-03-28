@@ -111,8 +111,7 @@ ScreenManager:
             source: "Background_DB.png"
         
 ``` 
-
-Size hint means the size as a relation to the parent, or the screen 
+I then to have a place to put all my elements inside, I do this by creating an MDCard and an MDBox. 
 ```
 MDCard:
         size_hint: 0.6, 0.6 #relational to parent
@@ -127,8 +126,7 @@ MDCard:
             padding: dp(10)
             spacing: dp(20)
  ``` 
- 
- Add label 
+ Now that I have the basic screen created, I need to write in all the text. I first do this by adding a Login Label. 
  ```
  MDLabel:
           text: "Login"
@@ -137,13 +135,11 @@ MDCard:
           text: "Login"
           font_style: "H4"
           halign:"center"
-
 ``` 
 
-Text Field 
+Next, I need a place for the user to input their username and password. This is called a textfield. There are certain properties of textfield which are quite useful, such as making the input "required" or having a message pop-up if there is an error (this is called helper text). Once the user inputs their username and password, I ned to validate that the user account exists. I do this by creating a method in python and calling it once validating the text. 
 
 ```
-
  MDTextField:
      id: username_input
      hint_text: "Username"
@@ -162,7 +158,8 @@ Text Field
      required: True
      password: True
 ``` 
-Buttons
+Lastly, I need to create the buttons. There are two buttons needed: the login buton and the register button. The login button will validate the user while register button will change to the registration screen. The way I create the login button is by creating a method in python and calling it once the button is pressed, while I can just changeto the Register Screen once the register button is pressed. 
+
 ```
             MDRaisedButton:
                 text: "Log in"
@@ -174,25 +171,22 @@ Buttons
                 text: "Register"
                 on_release:
                     root.parent.current = "RegisterScreen"
-                   
 ```
-
 
 ***Logic to create the screens*** 
 
+I've created the Kivy file to creat a UI but there is no logic which will make any of the functions work. To fix this, I need a complimentary Python file which will make my program work. The most fundamental and basic python code you need is a class to create all the screens and thee app itself. I addede the Amber theme to my app, which is part of the Kivy library. This will result in many of my widgets using an amber colour palette. 
 ```py
-
 class LoginScreen(MDScreen):
     pass 
     
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Amber"
-        return
-        
-        
-
+        return  
 ```
+
+I've created the program but I now need a database which collect user information, such as user accounts, and CAS activity. I will use ORM in order to expedite and abstract much of the query process. 
 
 ***Creating tables with ORM*** 
 ```py
