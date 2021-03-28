@@ -18,7 +18,7 @@ My client, Cathy, needs a new system for recording down her CAS activity for IB.
 
 ### Proposed Solution 
 
-My proposed solutions is to create a remote program using Python and the Kivy Library. The Kivy library provides a framework for both computer and phone applications, making it easy for the developer to implement a GUI (graphical user interface) in the application. This, in turn, makes the program much easier for the custotmer to use because they do not need to use the python console or terminal, but just the GUI screen provided. For the database itself, the data and tables will be stored and created using SQLAlchemy, and the relationships and queries will all be done using ORM (object-relational-mapping). Lastly, the program will include a log-in and registration feature, a page which the user can enter their CAS activities (date, activity name, activity type, and duration of activity all will be included), and a page which the user can look at their previous records. After a consultation with the client, she approved. 
+My proposed solutions is to create a remote program using Python and the Kivy Library. The Kivy library provides a framework for both computer and phone applications, making it easy for the developer to implement a GUI (graphical user interface) in the application. This, in turn, makes the program much easier for the custotmer to use because they do not need to use the python console or terminal, but just the GUI screen provided. For the database itself, the data and tables will be stored and created using SQLAlchemy, and the relationships and queries will all be done using ORM (object-relational-mapping). Lastly, the program will include a log-in and registration feature, a page which the user can enter their CAS activities (date, activity name, activity type, duration per activity). After a consultation with the client, she approved of this plan. 
  
 ### Justification 
 
@@ -61,8 +61,7 @@ The project is due on April 1st, including development and documentatiton. This 
 3.  Record the time spent per activity
 4.  Include 1 monkey in GUI and 2 personalised small icons 
 5.  Include calender for choosing date 
-6.  Record the accumulated time per category
-7.  Include log-in with username and password
+6.  Include log-in with username and password
 
 ## Criteria B: Design 
 
