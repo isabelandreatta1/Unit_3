@@ -187,6 +187,8 @@ class MainApp(MDApp):
 
 I've created the program but I now need a database which collect user information, such as user accounts, and CAS activity. I will use ORM in order to expedite and abstract much of the query process. 
 
+Based on my diagrams and plan, I know I need to tables:  a user table and a CAS activity table. I simply create two classes for each table, and write down their attributes. Each one will have their own primary key, which autoincrements, while the other values are input by the user. The benefit of using SQLAlchemy is that it makes relationships much easier: instead of creating a third table to establish their relationship (as shown in my normalisation tables), I can simply use a foreign key by referencing the user IDs and connecting them as such. 
+
 ***Creating tables with ORM*** 
 ```py
 Base = declarative_base()
@@ -218,31 +220,13 @@ session = sessionmaker()
 session.configure(bind=engine)
 Base.metadata.create_all(engine)
 ``` 
+After creating the data tables, I need a way to be able to input values in it and also to create the logic behind the login process. Within the LoginScreen, I create all the methods which will used when logging in. 
+
+The first thing I need to do is connect the database to the input, and query to see if the username and password exists in the database. If the password and username correspond to values in the User table, then the screen will change to the Homepage. However, if the user does not exist, then a message will tell the user that the username or password is incorrect. To show this message, I will create a method which will assert an error, and then the text "incorrect username or password" will show on the screen.
 
 ***Verifying user using database and logic behind Login*** 
 ```py
 class LoginScreen(MDScreen):
-
-    def validate_user(self):
-        self.ids.password_input.error = True
-        self.ids.password_input.helper_text = "Incorrect username or password"
-        print(self.ids.username_input.error)
-        print(self.ids.username_input.helper_text)
-
-    def try_login(self):
-        username = self.ids.username_input.text
-        password= self.ids.password_input.text
-        Session = sessionmaker(bind = engine)
-        session = Session()
-        validate_user = session.query(User).filter_by(username = username, password = password).one_or_none()
-        if validate_user:
-            print("User exists")
-            self.parent.current = "HomePage"
-
-        else:
-            print("User does not exist")
-            self.validate_user()
-        session.close()class LoginScreen(MDScreen):
 
     def validate_user(self):
         self.ids.password_input.error = True
@@ -268,7 +252,7 @@ class LoginScreen(MDScreen):
 
 ### Creating the Registration Screen 
 
-UI creation is similar process of login screen 
+Next, I need to create a registration screen since a user can not login without registering an account. For the UI (or Kivy file) and the start-up Python file (i.e creating class for screen) is very similar as the process of coding the login screen; the new step is to add the user input to the database. To ensure that the user does not make any mistakes while making their account, I added a second password input text field so that they can confirm they put the same password. If both passwords are equal to each other, then the code creates a new session in the database, and inputs the username and password values in the User table. If they do not match, then I need some type of indicator so the user is aware of the error. I did so by adding a message in the python console. 
 
 ***Adding user to database*** 
 ```py
@@ -286,18 +270,14 @@ UI creation is similar process of login screen
             print("Passwords don't match")
 ```
 
-
 ### Creating the Home Page 
 
-Just create a screen with two buttons. Most simplest aspect but very important 
+Just create a screen with two buttons.
 
 
 ### Creating the Add Entry Page 
 
 Similar process of login screen but more complicated. 
-
-
-### Creating the Past Entries Page 
 
 
 ## Criteria D: Functionality 
