@@ -69,27 +69,44 @@ The project is due on April 1st, including development and documentatiton. This 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/sketch_db.jpg" width=50% height=50%>
 
-Figure 1: 
+*Figure 1: A draft sketch of the UI screen and screen flow chart*
+
+### Code Flow Diagrams: 
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/RegisterScreen_Flow.png" width=50% height=50%>
+
+*Figure 2: Flow diagram of the registration screen* 
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/LoginScreen_Flow.png" width=50% height=50%>
+
+*Figure 3: Flow diagram of the login screen* 
+
+<img src="" width=50% height=50%>
+
+*Figure 4: Flow diagram of the add entry screen* 
 
 ### System Flow Diagram 
 
-Figure 2: 
+*Figure 5: System flow diagram with the inputs, outputs and flow of information* 
 
 ### UML Diagram 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML.png" width=50% height=50%>
 
-Figure 3: 
+*Figure 6: Above is a UML Diagram of the program database. It shows each classes' attributes and their relationship. For each User, they can have n number of CAS activities* 
 
 ### ER Diagrams 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ER_Diagram.png" width=50% height=50%>
-Figure 4: 
+
+*Figure 7: Above is an ER Diagraam*
 
 ### Normalised Tables 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png" width=50% height=50%>
-Figure 5: 
+
+*Figure 8: *
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
-Figure 6: 
+
+*Figure 9: *
 
 ## Criteria C: Development 
 
