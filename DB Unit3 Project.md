@@ -277,7 +277,74 @@ Just create a screen with two buttons.
 
 ### Creating the Add Entry Page 
 
-Similar process of login screen but more complicated. 
+```py
+class AddNewEntry(MDScreen):
+    select_date = None
+
+    def on_save(self, instance, value, date_range):
+        '''
+        Events called when the "OK" dialog box button is clicked.
+
+        :type instance: <kivymd.uix.picker.MDDatePicker object>;
+
+        :param value: selected date;
+        :type value: <class 'datetime.date'>;
+
+        :param date_range: list of 'datetime.date' objects in the selected range;
+        :type date_range: <class 'list'>;
+        '''
+
+        print(value)
+        AddNewEntry.select_date = value
+
+    def on_cancel(self, instance, value):
+        '''Events called when the "CANCEL" dialog box button is clicked.'''
+
+    def show_date_picker(self):
+        date_dialog = MDDatePicker()
+        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        date_dialog.open()
+
+    def set_item(self, instance_menu, instance_menu_item):
+        self.screen.ids.drop_down.set_item(instance_menu_item.text)
+        instance_menu.dismiss()
+
+    def drop_down_method(self):
+        menu_items = ["10m", "20m", "30m", "40m", "50m", "1h"]
+        self.menu = MDDropdownMenu(
+            caller=self.ids.drop_down,
+            items=menu_items,
+            position="center",
+            width_mult=6,
+        )
+        self.menu.bind(on_release=self.set_item)
+
+    def check_cas_type(self):
+        if self.ids.creativity_type.state == "down":
+            self.cas_type = "Creativity"
+            print(self.cas_type)
+        elif self.ids.activity_type.state == "down":
+            self.cas_type = "Activity"
+            print(self.cas_type)
+        elif self.ids.service_type.state == "down":
+            self.cas_type = "Service"
+            print(self.cas_type)
+
+    def addEntry(self):
+        activity_name = self.ids.activity_input.text
+        duration = self.ids.duration_input.text
+        add_date = AddNewEntry.select_date
+        cas_type = self.cas_type
+        user_id = LoginScreen.user_id
+        print(user_id)
+        print(cas_type)
+        s = session()
+        NewActivity = CAS_Record(activity_name, add_date, duration, cas_type, user_id)
+        s.add(NewActivity)
+        s.commit()
+        s.close()
+        print("complete")
+``` 
 
 
 ## Criteria D: Functionality 
