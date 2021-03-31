@@ -87,6 +87,8 @@ The project is due on April 1st, including development and documentatiton. This 
 
 ### System Flow Diagram 
 
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/system_diagram.png" width=50% height=50%>
+
 *Figure 5: System flow diagram with the inputs, outputs and flow of information* 
 
 ### UML Diagram 
