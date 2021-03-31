@@ -4,11 +4,11 @@
 
 1. [Planning](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-a-planning)
 2. [Design](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-b-design)
-3. [Development]()
-4. [Functionality]()
-5. [Evaluation]()
+3. [Development](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-c-development)
+4. [Functionality](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-d-functionality)
+5. [Evaluation](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#criteria-e-evaluation)
 7. [Appendix](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#appendix)
-8. [Citation]()
+8. [Citation](https://github.com/isabelandreatta1/Unit_3/blob/main/DB%20Unit3%20Project.md#citations)
 
 ## Criteria A: Planning 
 
@@ -69,22 +69,27 @@ The project is due on April 1st, including development and documentatiton. This 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/sketch_db.jpg" width=50% height=50%>
 
+Figure 1: 
+
 ### System Flow Diagram 
 
-### Flow Diagram 
+Figure 2: 
 
 ### UML Diagram 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UML.png" width=50% height=50%>
 
+Figure 3: 
+
 ### ER Diagrams 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/ER_Diagram.png" width=50% height=50%>
+Figure 4: 
 
 ### Normalised Tables 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png" width=50% height=50%>
+Figure 5: 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
-
-### UI Screenshots 
+Figure 6: 
 
 ## Criteria C: Development 
 
@@ -347,6 +352,19 @@ While for the cas type, I will have each CAS category as a button. One of Kivy b
         s.close()
         print("complete")
 ``` 
+### UI Screenshots 
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Saved.png" width=50% height=50%>
+Figure : Above is a screenshot of the saved button. This page appears once a new entry has been saved to the data base
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Login.png" width=50% height=50%>
+
+Figure : Above is a screenshot of the login page
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/HomePAge.png " width=50% height=50%>
+
+Figure : Above is a screenshot of the home page 
+
 
 ## Criteria D: Functionality 
 
@@ -380,11 +398,19 @@ Above is my functionality video.
 
 ### Conversations with client  
 
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Client_Talk_1.png" width=50% height=50%>
+
+Figure : Above is one of the recorded conversations with my client to understand the purpose of the program
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Client_Talk_2.png" width=50% height=50%>
+
+Figure: This imaage shows that my client approves of the success criteria we created together 
+
 ### Source Code 
 
-### Python File 
+***Python File*** 
 
-### Kivy File 
+***Kivy File*** 
 
 ## Citations 
 
