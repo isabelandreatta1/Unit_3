@@ -323,8 +323,7 @@ While for the cas type, I will have each CAS category as a button. One of Kivy b
             print(self.cas_type)
  ```
  
- The very last step of my program is to add all the cas information to the database. In addition to the user inputs, the user_id also needs to be included. 
- 
+ The very last step of my program is to add all the cas information to the database. In addition to the user inputs, the user_id also needs to be included. For the user_id, I call the user_id variable I created in the login screen. This makes sure that the user_id is the same as the logged in user. Then, I put the information in the CAS record database. With that, my program's basic functionality is complete. 
  
 ```py
 
