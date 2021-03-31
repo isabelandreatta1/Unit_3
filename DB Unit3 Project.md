@@ -272,10 +272,12 @@ Next, I need to create a registration screen since a user can not login without 
 
 ### Creating the Home Page 
 
-Just create a screen with two buttons.
+For the home page, I just need to create a screen with one button. The button will bring the user to the add CAS activity screen. The home page is just a matter of repeating the same elements as my previous ones. 
 
 
 ### Creating the Add Entry Page 
+
+The add entry page is the most important aspect of my program since it is the purpose of this project. The user must be able to input a variety of items, including: 1. CAS activity name 2. Type of activity (choose from Creativity, Activity, Service), 3. Duration of activity 4. Date. For the activity name and the duration of activity, I will make both values into text fields (or user inputs) because each activity has a unique value. However, for the date and type of activity, I want the user to press a button instead of inputting a value so, not only is the process easier, but it reduces chances of the user writing the information incorrectly. If the user uses a button, the program has a standard format for type of activity and date. 
 
 ```py
 class AddNewEntry(MDScreen):
