@@ -280,7 +280,6 @@ Firstly, I create a method which will add the entry. The acitivty name and durat
 This makes the date format standard, and is much more user friendly than having to type the input. To use this widget, I need to create two additional methods: on_save and on_cancel. These methods must be included when using the datePicker widget because the on_save method will save the date value selected, while the on cancel method will delete all new changes. 
 
 ```py
-```py
 class AddNewEntry(MDScreen):
     select_date = None
 
