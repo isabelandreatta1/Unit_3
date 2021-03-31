@@ -84,6 +84,8 @@ The project is due on April 1st, including development and documentatiton. This 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
 
+### UI Screenshots 
+
 ## Criteria C: Development 
 
 ### Login Screen 
@@ -276,6 +278,9 @@ For the home page, I just need to create a screen with one button. The button wi
 The add entry page is the most important aspect of my program since it is the purpose of this project. The user must be able to input a variety of items, including: 1. CAS activity name 2. Type of activity (choose from Creativity, Activity, Service), 3. Duration of activity 4. Date. For the activity name and the duration of activity, I will make both values into text fields (or user inputs) because each activity has a unique value. However, for the date and type of activity, I want the user to press a button instead of inputting a value so, not only is the process easier, but it reduces chances of the user writing the information incorrectly. If the user uses a button, the program has a standard format for type of activity and date. 
 
 Firstly, I create a method which will add the entry. The acitivty name and duration are user inputs. For the date, I will use a date picker widget. It looks like the figure below. 
+
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/DatePickerWidget.png" width=50% height=50%>
+
 
 This makes the date format standard, and is much more user friendly than having to type the input. To use this widget, I need to create two additional methods: on_save and on_cancel. These methods must be included when using the datePicker widget because the on_save method will save the date value selected, while the on cancel method will delete all new changes. 
 
