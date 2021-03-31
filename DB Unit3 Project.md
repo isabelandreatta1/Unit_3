@@ -86,10 +86,6 @@ The project is due on April 1st, including development and documentatiton. This 
 
 ## Criteria C: Development 
 
-- present the problem first
-- write comments
-- make sure variable names are meaningful 
-
 ### Login Screen 
 
 ***UI creation using Kivy*** 
@@ -279,6 +275,11 @@ For the home page, I just need to create a screen with one button. The button wi
 
 The add entry page is the most important aspect of my program since it is the purpose of this project. The user must be able to input a variety of items, including: 1. CAS activity name 2. Type of activity (choose from Creativity, Activity, Service), 3. Duration of activity 4. Date. For the activity name and the duration of activity, I will make both values into text fields (or user inputs) because each activity has a unique value. However, for the date and type of activity, I want the user to press a button instead of inputting a value so, not only is the process easier, but it reduces chances of the user writing the information incorrectly. If the user uses a button, the program has a standard format for type of activity and date. 
 
+Firstly, I create a method which will add the entry. The acitivty name and duration are user inputs. For the date, I will use a date picker widget. It looks like the figure below. 
+
+This makes the date format standard, and is much more user friendly than having to type the input. To use this widget, I need to create two additional methods: on_save and on_cancel. These methods must be included when using the datePicker widget because the on_save method will save the date value selected, while the on cancel method will delete all new changes. 
+
+```py
 ```py
 class AddNewEntry(MDScreen):
     select_date = None
@@ -306,21 +307,11 @@ class AddNewEntry(MDScreen):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
         date_dialog.open()
+``` 
 
-    def set_item(self, instance_menu, instance_menu_item):
-        self.screen.ids.drop_down.set_item(instance_menu_item.text)
-        instance_menu.dismiss()
+While for the cas type, I will have each CAS category as a button. One of Kivy button behaviours is that, when a button is pressed, the button state is down, and when the button is not pressed, then the button state is normal. On the release of the button press, a method will check which button's state is down (which was pressed), and then assign the cas activity variable.
 
-    def drop_down_method(self):
-        menu_items = ["10m", "20m", "30m", "40m", "50m", "1h"]
-        self.menu = MDDropdownMenu(
-            caller=self.ids.drop_down,
-            items=menu_items,
-            position="center",
-            width_mult=6,
-        )
-        self.menu.bind(on_release=self.set_item)
-
+```py
     def check_cas_type(self):
         if self.ids.creativity_type.state == "down":
             self.cas_type = "Creativity"
@@ -331,6 +322,12 @@ class AddNewEntry(MDScreen):
         elif self.ids.service_type.state == "down":
             self.cas_type = "Service"
             print(self.cas_type)
+ ```
+ 
+ The very last step of my program is to add all the cas information to the database. In addition to the user inputs, the user_id also needs to be included. 
+ 
+ 
+```py
 
     def addEntry(self):
         activity_name = self.ids.activity_input.text
@@ -348,12 +345,11 @@ class AddNewEntry(MDScreen):
         print("complete")
 ``` 
 
-
 ## Criteria D: Functionality 
 
 https://drive.google.com/file/d/1uiGoPknZZWblvtDjy1pMCVxiAxIvHRAg/view?usp=sharing 
 
-Above is my functionality video 
+Above is my functionality video. 
 
 ## Criteria E: Evaluation 
 
