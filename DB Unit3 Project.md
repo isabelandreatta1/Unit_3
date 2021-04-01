@@ -559,6 +559,7 @@ class AddNewEntry(MDScreen):
 
         print(value)
         AddNewEntry.select_date = value
+        #create value so I can recall in another method 
 
     def on_cancel(self, instance, value):
         '''Events called when the "CANCEL" dialog box button is clicked.'''
@@ -567,10 +568,12 @@ class AddNewEntry(MDScreen):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
         date_dialog.open()
+        #method to create datePicker widget 
 
     def check_cas_type(self):
-        self.ids.creativity_type.background_color = 1.0, 0.0, 0.0, 1.0
+        #if condition to see which buttonns are pressed 
         if self.ids.creativity_type.state == "down":
+            #down state means button pressed 
             self.cas_type = "Creativity"
             print(self.cas_type)
         elif self.ids.activity_type.state == "down":
@@ -589,13 +592,12 @@ class AddNewEntry(MDScreen):
         print(user_id)
         print(cas_type)
         s = session()
+        #add activity to records 
         NewActivity = CAS_Record(activity_name, add_date, duration, cas_type, user_id)
         s.add(NewActivity)
         s.commit()
         s.close()
         print("complete")
-    # Add entry to the CAS activities
-    # /2. Type of Activity (will change table), 3. time/duration 4. Date
 
 class MainApp(MDApp):
     def build(self):
