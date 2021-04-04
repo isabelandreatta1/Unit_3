@@ -409,9 +409,7 @@ Above is my functionality video.
 
 ###  Unit Testing 
 
-**Unit Testing for the Hash Passwords** 
-
-Hash Password for Register Screen: 
+**Unit Testing for the Hash Passwords Register Screen** 
 
 In order to test if the hash password is working for the register screen, I created a table just for the register screen hashed passwords. The new data table will have two columns: input passwords and hashed password. This way I can make sure that the input password is correct, that it is hashing the password, and that it is successfully saving in the data base. I put 5 different inputs and then checked what saved on the database. I also disabled the login function just to ensure I was only checking the hash password for register screen. Below is the results of the table: 
 
