@@ -409,6 +409,47 @@ Above is my functionality video.
 
 ###  Unit Testing 
 
+**Unit Testing for the Hash Passwords** 
+
+Hash Password for Register Screen: 
+
+In order to test if the hash password is working for the register screen, I created a table just for the register screen hashed passwords. The new data table will have two columns: input passwords and hashed password. This way I can make sure that the input password is correct, that it is hashing the password, and that it is successfully saving in the data base. I put 5 different inputs and then checked what saved on the database. I also disabled the login function just to ensure I was only checking the hash password for register screen. Below is the results of the table: 
+
+| Test Number | Input  | Is the input saved correctly? | Is the length of the hashed password 128 characters? |
+|-------------|--------|-------------------------------|------------------------------------------------------|
+| 1           | test   | Yes                           | Yes                                                  |
+| 2           | 123    | Yes                           | Yes                                                  |
+| 3           | !!!    | Yes                           | Yes                                                  |
+| 4           | a      | Yes                           | Yes                                                  |
+| 5           | monkey | Yes                           | Yes                                                  |
+
+Because it is too complicated to check if the password was hashed correctly, a way to circumvent this is to check if the length of the stored password is 128 characters. This is because any text that is hashed turns to 64 Hex character length. Because the stored password is addded with the salt, this means the length of the storede password must be 128 characters (or 64 + 64 characters). 
+
+As seen from the test above, it can be concludued that the register screen hashing is successful. 
+
+
+```py
+ def try_login(self):
+        #ids from Kivy file and rename them as simple variables
+        username = self.ids.username_input.text
+        password = self.ids.password_input.text
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        #query to see if the user input and password input exists in the tbale
+        validate_user = session.query(User).filter_by(username=username).one_or_none()
+
+        #if the query result exists then...
+        if validate_user:
+            print("User exists")
+            #variabale for user_id which can be called from outside of this class
+            LoginScreen.user_id = validate_user.id
+            #query to check if password is  correct
+            stored_password = session.query(User).get(validate_user.id).password
+            if LoginScreen.verify_password(stored_password, password) == True:
+                #screen changes to home Page
+                self.parent.current = "HomePage"  
+```
+
 ### Beta Testing 
 
 ### Extent and Limitations of Program 
