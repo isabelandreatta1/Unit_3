@@ -295,6 +295,11 @@ Next, I need to create a registration screen since a user can not login without 
 
 Hash functions are functions that convert any length input into fixed-length encrypted string. This is very valuable to secure a database because vulnerable information, because usually hash values are always unique and hard to interpret (no matter if a novel or word, they will always result in the same length value so hackers will not know the actual length of the original input), the brute force method of "decyphering" a hash value makes it almost impossible because of the high computational power and time needed.
 
+To hash the passwords, I need to have two functions. The first function needs to hash the password during the register screen, and the second function checks if the password input during the login processs is the same as the hash in the data base. 
+
+The first function, which is caalled ```hash_password``` focuses on doing two things: hashing the password and hashing/adding a salt. A salt is a random value which is added to the password, which then further encrypts the password and makes it difficult for external parties to crack the password. 
+
+The second function, ```verify_password``` instead works on comparing the hash with the 
 
 ```py
 def verify_password(stored_password, password):
