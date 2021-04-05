@@ -104,11 +104,11 @@ The project is due on April 1st, including development and documentatiton. This 
 ### Normalised Tables 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_1.png" width=50% height=50%>
 
-*Figure 8: *
+*Figure 8: Normalised tables for User Information and CAS Record Information. They have beeen normalised until the third form, which means that each record is unique, each cell contains a value, includes a single column primary key, and each column is independent *
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/norm_table_2.png" width=50% height=50%>
 
-*Figure 9: *
+*Figure 9: Normalised table for the relationship between User Information and CAS Record Information.*
 
 ## Criteria C: Development 
 
@@ -305,6 +305,7 @@ Firstly, I create a method which will add the entry. The acitivty name and durat
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/DatePickerWidget.png" width=50% height=50%>
 
+*Figure 10: Date picker widget sample* 
 
 This makes the date format standard, and is much more user friendly than having to type the input. To use this widget, I need to create two additional methods: on_save and on_cancel. These methods must be included when using the datePicker widget because the on_save method will save the date value selected, while the on cancel method will delete all new changes. 
 
@@ -374,15 +375,15 @@ While for the cas type, I will have each CAS category as a button. One of Kivy b
 ### UI Screenshots 
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Saved.png" width=50% height=50%>
-Figure : Above is a screenshot of the saved button. This page appears once a new entry has been saved to the data base
+*Figure 11: Above is a screenshot of the saved button. This page appears once a new entry has been saved to the data base*
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Login.png" width=50% height=50%>
 
-Figure : Above is a screenshot of the login page
+*Figure 12: Above is a screenshot of the login page*
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/HomePAge.png " width=50% height=50%>
 
-Figure : Above is a screenshot of the home page 
+*Figure 13: Above is a screenshot of the home page*
 
 
 ## Criteria D: Functionality 
