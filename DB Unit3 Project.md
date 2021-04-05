@@ -474,7 +474,6 @@ Figure: This imaage shows that my client approves of the success criteria we cre
 ```py
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey, desc
 from sqlalchemy.ext.declarative import declarative_base
-from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
@@ -482,10 +481,12 @@ from kivymd.uix.label import MDLabel
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from kivymd.uix.picker import MDDatePicker
-
+import hashlib, binascii, os
+from sqlalchemy import and_
 Base = declarative_base()
 
 # create User table
+
 class User(Base):
     __tablename__ = 'User'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -515,6 +516,7 @@ class CAS_Record(Base):
         self.cas_type = cas_type
         self.user_id = user_id
 
+
 #this creates the tables
 engine = create_engine('sqlite:///database.sqlite')
 session = sessionmaker()
@@ -524,11 +526,22 @@ Base.metadata.create_all(engine)
 #create class for Login screen
 class LoginScreen(MDScreen):
     user_id = None
+    stored_password = None
     #asssert error method
     def validate_user(self):
         self.ids.password_input.error = True
         #will show helper text if there is an error
         self.ids.password_input.helper_text = "Incorrect username or password"
+
+    def verify_password(stored_password, password):
+        """Verify a stored password against one provided by user"""
+        salt = stored_password[:64]
+        stored_password = stored_password[64:]
+        #here it encodees the password
+        pwdhash = hashlib.pbkdf2_hmac('sha256',password.encode('utf-8'),salt.encode('ascii'),100000)
+        pwdhash = binascii.hexlify(pwdhash).decode('ascii')
+        #check  if password is the  same as stored password
+        return pwdhash == stored_password
 
     #login method
     def try_login(self):
@@ -538,14 +551,21 @@ class LoginScreen(MDScreen):
         Session = sessionmaker(bind=engine)
         session = Session()
         #query to see if the user input and password input exists in the tbale
-        validate_user = session.query(User).filter_by(username=username, password=password).one_or_none()
+        validate_user = session.query(User).filter_by(username=username).one_or_none()
+
         #if the query result exists then...
         if validate_user:
             print("User exists")
             #variabale for user_id which can be called from outside of this class
             LoginScreen.user_id = validate_user.id
-            #screen changes to home Page
-            self.parent.current = "HomePage"
+            #query to check if password is  correct
+            stored_password = session.query(User).get(validate_user.id).password
+            print(stored_password)
+            print(password)
+            print(LoginScreen.verify_password(stored_password,password))
+            if LoginScreen.verify_password(stored_password, password) == True:
+                #screen changes to home Page
+                self.parent.current = "HomePage"
 
         else:
             #print message on python console
@@ -556,16 +576,26 @@ class LoginScreen(MDScreen):
 
 #creaate class fo Registration Screen
 class RegisterScreen(MDScreen):
+
+    def hash_password(self):
+        password = self.ids.new_password_input.text
+        """Hash a password for storing."""
+        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii') #hashing a ramdom sequence with 60 bits: produces 256 bits or 64 hex chars
+        pwdhash = hashlib.pbkdf2_hmac('sha256',password.encode('utf-8'),salt, 100000)
+        pwdhash = binascii.hexlify(pwdhash) #hashing the password with the salt producing 256 bits or 64 hex chars
+        return (salt + pwdhash).decode('ascii') #total lenght is 128 chars or 512 bits
+
     def try_register(self):
         username = self.ids.new_username_input.text
-        password = self.ids.new_password_input.text
+        input_password = self.ids.new_password_input.text
         #have a confirm password to make sure the user input password correctly
         password_confirm = self.ids.new_password_confirm.text
         #if both password input are equal
-        if password == password_confirm:
+        hashed_password = RegisterScreen.hash_password(self)
+        if input_password == password_confirm:
             s = session()
             #add the username and password to the User table
-            NewUser = User(username, password)
+            NewUser = User(username, hashed_password)
             s.add(NewUser)
             s.commit()
             s.close()
@@ -602,21 +632,22 @@ class AddNewEntry(MDScreen):
 
         print(value)
         AddNewEntry.select_date = value
-        #create value so I can recall in another method 
+        #create value so I can recall in another method
 
     def on_cancel(self, instance, value):
         '''Events called when the "CANCEL" dialog box button is clicked.'''
+        print("cancel")
 
     def show_date_picker(self):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
         date_dialog.open()
-        #method to create datePicker widget 
+        #method to create datePicker widget
 
     def check_cas_type(self):
-        #if condition to see which buttonns are pressed 
+        #if condition to see which buttonns are pressed
         if self.ids.creativity_type.state == "down":
-            #down state means button pressed 
+            #down state means button pressed
             self.cas_type = "Creativity"
             print(self.cas_type)
         elif self.ids.activity_type.state == "down":
@@ -635,7 +666,7 @@ class AddNewEntry(MDScreen):
         print(user_id)
         print(cas_type)
         s = session()
-        #add activity to records 
+        #add activity to records
         NewActivity = CAS_Record(activity_name, add_date, duration, cas_type, user_id)
         s.add(NewActivity)
         s.commit()
@@ -648,6 +679,7 @@ class MainApp(MDApp):
         return
 
 MainApp().run()
+
 ``` 
 
 ***Kivy File*** 
