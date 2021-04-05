@@ -538,8 +538,11 @@ I had a person who was not involved with the development of this program to do t
 | 7. Cancel Entry        | Repeat Add entry process but instead of pressing done,  press return                                                             | None of the inputs from the entry are saved in the database                     | Include the ability to input CAS activity                                                                             | X       |
 | 8. Save Entry          | Press "Done" Button                                                                                                              | Screen with a picture of a monkey  should appear                                | Include 1 monkey in GUI                                                                                               | X       |
 
-### Extent and Limitations of Program 
-- 
+### Evaluation against Success Criteria 
+
+### User Feedback 
+
+### Reccommendations for future development 
 
 ## Appendix 
 
