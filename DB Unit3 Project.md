@@ -452,7 +452,7 @@ While for the cas type, I will have each CAS category as a button. One of Kivy b
 
 *Figure 12: Above is a screenshot of the login page*
 
-<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/HomePAge.png " width=50% height=50%>
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/HomePAge.png" width=50% height=50%>
 
 *Figure 13: Above is a screenshot of the home page*
 
@@ -542,7 +542,25 @@ I had a person who was not involved with the development of this program to do t
 
 ### User Feedback 
 
+"I really like the Monkey UI because it feels very personalised and has very clear navigation because of its button. This way I can easily and quickly record my activity. But, if I could see all my CAS activity on the program but not on the python consol, that would be very cool. Anyways, I am very happy about this!" 
+
+-- Recorded interview with client on April 5th 2021 
+
 ### Reccommendations for future development 
+
+**Minor fixes:**
+
+- make sure that all the butons are consistent and the same design to make it appear most professional 
+- Further work on the layout design so that there is consistency 
+- Add logout function 
+- Create a second page where I print all recent CAS activity by quering all recent CAS activity with the same user ID 
+- Add more hint texts so that for some errors, it doesn't show on python console 
+- Have text which shows total time spent per CAS category for each user 
+
+**Major fixes:** 
+- Change library that I am using, this is because Kivy is quite limited, especially when it comes to widgets or displaying other things other than text 
+- Add a graph which shows recent activity compared to the amount of total time spent for each cas category 
+- Make it possible for the program to be shared with other computers (compiling the program under a zip or application) because for now, the program is only available on my own computer 
 
 ## Appendix 
 
@@ -550,11 +568,11 @@ I had a person who was not involved with the development of this program to do t
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Client_Talk_1.png" width=50% height=50%>
 
-Figure : Above is one of the recorded conversations with my client to understand the purpose of the program
+Figure 14: Above is one of the recorded conversations with my client to understand the purpose of the program
 
 <img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Client_Talk_2.png" width=50% height=50%>
 
-Figure: This imaage shows that my client approves of the success criteria we created together 
+Figure 15: This imaage shows that my client approves of the success criteria we created together 
 
 ### Source Code 
 
