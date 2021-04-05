@@ -414,7 +414,7 @@ Above is my functionality video.
 
 In order to test if the hash password is working for the register screen, I created a table just for the register screen hashed passwords. The new data table will have two columns: input passwords and hashed password. This way I can make sure that the input password is correct, that it is hashing the password, and that it is successfully saving in the data base. I put 5 different inputs and then checked what saved on the database. I also disabled the login function just to ensure I was only checking the hash password for register screen. Below is the results of the table: 
 
-<img src="https://shakespeare.folger.edu/downloads/pdf/othello_PDF_FolgerShakespeare.pdf" width=50% height=50%>
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/UnitTesting_Hash.png" width=50% height=50%>
 
 *Figure 13: Data Table Hashed Password* 
 
