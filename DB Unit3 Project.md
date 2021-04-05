@@ -293,8 +293,10 @@ Next, I need to create a registration screen since a user can not login without 
 ```
 ### Hashing Passwords 
 
-```py
+Hash functions are functions that convert any length input into fixed-length encrypted string. This is very valuable to secure a database because vulnerable information, because usually hash values are always unique and hard to interpret (no matter if a novel or word, they will always result in the same length value so hackers will not know the actual length of the original input), the brute force method of "decyphering" a hash value makes it almost impossible because of the high computational power and time needed.
 
+
+```py
 def verify_password(stored_password, password):
         """Verify a stored password against one provided by user"""
         salt = stored_password[:64]
@@ -354,8 +356,6 @@ class RegisterScreen(MDScreen):
             s.add(NewUser)
             s.commit()
             s.close()
-            
-
 
 ```
 ### Creating the Home Page 
