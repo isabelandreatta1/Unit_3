@@ -81,7 +81,7 @@ The project is due on April 1st, including development and documentatiton. This 
 
 *Figure 3: Flow diagram of the login screen* 
 
-<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Register_Screen_Flow.png" width=50% height=50%>
+<img src="https://github.com/isabelandreatta1/Unit_3/blob/main/folder/Register_Screen_Flow.png" width=75% height75%>
 
 *Figure 4: Flow diagram of the add entry screen* 
 
