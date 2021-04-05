@@ -539,6 +539,7 @@ I had a person who was not involved with the development of this program to do t
 | 8. Save Entry          | Press "Done" Button                                                                                                              | Screen with a picture of a monkey  should appear                                | Include 1 monkey in GUI                                                                                               | X       |
 
 ### Extent and Limitations of Program 
+- 
 
 ## Appendix 
 
