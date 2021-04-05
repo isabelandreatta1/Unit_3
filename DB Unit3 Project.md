@@ -291,7 +291,73 @@ Next, I need to create a registration screen since a user can not login without 
         else:
             print("Passwords don't match")
 ```
+### Hashing Passwords 
 
+```py
+
+def verify_password(stored_password, password):
+        """Verify a stored password against one provided by user"""
+        salt = stored_password[:64]
+        stored_password = stored_password[64:]
+        #here it encodees the password
+        pwdhash = hashlib.pbkdf2_hmac('sha256',password.encode('utf-8'),salt.encode('ascii'),100000)
+        pwdhash = binascii.hexlify(pwdhash).decode('ascii')
+        #check  if password is the  same as stored password
+        return pwdhash == stored_password
+
+    #login method
+    def try_login(self):
+        #ids from Kivy file and rename them as simple variables
+        username = self.ids.username_input.text
+        password = self.ids.password_input.text
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        #query to see if the user input and password input exists in the tbale
+        validate_user = session.query(User).filter_by(username=username).one_or_none()
+
+        #if the query result exists then...
+        if validate_user:
+            print("User exists")
+            #variabale for user_id which can be called from outside of this class
+            LoginScreen.user_id = validate_user.id
+            #query to check if password is  correct
+            stored_password = session.query(User).get(validate_user.id).password
+            print(stored_password)
+            print(password)
+            print(LoginScreen.verify_password(stored_password,password))
+            if LoginScreen.verify_password(stored_password, password) == True:
+                #screen changes to home Page
+                self.parent.current = "HomePage"
+                
+                
+class RegisterScreen(MDScreen):
+
+    def hash_password(self):
+        password = self.ids.new_password_input.text
+        """Hash a password for storing."""
+        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii') #hashing a ramdom sequence with 60 bits: produces 256 bits or 64 hex chars
+        pwdhash = hashlib.pbkdf2_hmac('sha256',password.encode('utf-8'),salt, 100000)
+        pwdhash = binascii.hexlify(pwdhash) #hashing the password with the salt producing 256 bits or 64 hex chars
+        return (salt + pwdhash).decode('ascii') #total lenght is 128 chars or 512 bits
+
+    def try_register(self):
+        username = self.ids.new_username_input.text
+        input_password = self.ids.new_password_input.text
+        #have a confirm password to make sure the user input password correctly
+        password_confirm = self.ids.new_password_confirm.text
+        #if both password input are equal
+        hashed_password = RegisterScreen.hash_password(self)
+        if input_password == password_confirm:
+            s = session()
+            #add the username and password to the User table
+            NewUser = User(username, hashed_password)
+            s.add(NewUser)
+            s.commit()
+            s.close()
+            
+
+
+```
 ### Creating the Home Page 
 
 For the home page, I just need to create a screen with one button. The button will bring the user to the add CAS activity screen. The home page is just a matter of repeating the same elements as my previous ones. 
